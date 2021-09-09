@@ -8,3 +8,28 @@
 plugins {
     java
 }
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    testImplementation(platform("org.junit:junit-bom:5.7.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+}
+
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("--enable-preview")
+}
+tasks.withType<Test> {
+    jvmArgs("--enable-preview")
+}
+tasks.withType<JavaExec> {
+    jvmArgs("--enable-preview")
+}
+
